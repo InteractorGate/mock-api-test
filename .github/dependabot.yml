@@ -1,12 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: "pip" # Para requirements.txt
-    directory: "/"
+    directory: "."
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
 
   - package-ecosystem: "github-actions" # Seguridad en workflows
-    directory: "/"
+    directory: "."
     schedule:
       interval: "weekly"
