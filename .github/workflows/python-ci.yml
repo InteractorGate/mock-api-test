@@ -1,0 +1,38 @@
+name: Python Quality Check
+
+on:
+  push:
+    # Esto hará que corra en absolutamente todas las ramas
+    branches: [ "**" ] 
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12' # Ajusta a tu versión de venv
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 # Linter para estilo de código
+
+    - name: Lint with flake8
+      run: |
+        # Para que no detenga el build si hay errores de estilo, pero te avise
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Errores de PEP8 (opcional, puedes ser más estricto después)
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run Tests
+      run: |
+        # Aquí es donde Django ejecutará tus pruebas unitarias
+        python manage.py test
