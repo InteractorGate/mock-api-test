@@ -5,5 +5,5 @@ djangorestframework_simplejwt==5.5.1
 psycopg2==2.9.12
 PyJWT==2.13.0
 python-dotenv==1.2.2
-sqlparse==0.5.5
+sqlparse==0.6.0
 tzdata==2024.2
